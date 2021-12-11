@@ -1,13 +1,10 @@
 import kivy
-from kivy.uix.behaviors import button
 kivy.require('2.0.0')
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.core.window import Window
-from kivy.clock import Clock
 from kivy.core.audio import SoundLoader
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
-from kivy.animation import Animation
 from random import randint
 
 class Main_Player:
@@ -17,6 +14,9 @@ class Main_Player:
         self.defense = defense
         self.magic = magic
         self.skin = skin 
+
+    def print_health(self):
+        return self.health
 
 Builder.load_file('MyTest.kv')
 
@@ -43,14 +43,69 @@ class Load(Screen):
     pass
 
 class Play(Screen):
+    remaining_points = 10
+    counter_health = 0
+    counter_strength = 0
+    counter_defense = 0
+    counter_magic = 0
+
+    def add_health(self, *args):
+        if self.remaining_points > 0:
+            self.remaining_points -= 1
+            self.counter_health += 1
+            self.ids.counter_health.text= str(self.counter_health)
+            self.ids.remaining_counter.text= str(self.remaining_points)
+            print("Terminal : 1 point de vie ajouté.")
+        return self.counter_health
+
+    def add_strength(self, *args):
+        if self.remaining_points > 0:
+            self.remaining_points -= 1
+            self.counter_strength += 1
+            self.ids.counter_strength.text= str(self.counter_strength)
+            self.ids.remaining_counter.text= str(self.remaining_points)
+            print("Terminal : 1 point de force ajouté.")
+        return self.counter_strength
+
+    def add_defense(self, *args):
+        if self.remaining_points > 0:
+            self.remaining_points -= 1
+            self.counter_defense += 1
+            self.ids.counter_defense.text= str(self.counter_defense)
+            self.ids.remaining_counter.text= str(self.remaining_points)
+            print("Terminal : 1 point de défense ajouté.")
+        return self.counter_defense
+
+    def add_magic(self, *args):
+        if self.remaining_points > 0:
+            self.remaining_points -= 1
+            self.counter_magic += 1
+            self.ids.counter_magic.text= str(self.counter_magic)
+            self.ids.remaining_counter.text= str(self.remaining_points)
+            print("Terminal : 1 point de magie ajouté.")
+        return self.counter_magic
+
+    def restart_caract(self, *args):
+        self.remaining_points = 10
+        self.counter_health = 0
+        self.counter_strength = 0
+        self.counter_defense = 0
+        self.counter_magic = 0
+        self.ids.counter_health.text= str(self.counter_health)
+        self.ids.counter_strength.text= str(self.counter_strength)
+        self.ids.counter_defense.text= str(self.counter_defense)
+        self.ids.counter_magic.text= str(self.counter_magic)
+        self.ids.remaining_counter.text= str(self.remaining_points)
+        print("Terminal : réinitialisation des points.")
+
+
+
 
     def Name(self):
         name = self.ids.name_of_player
         return name.text
-  
     
     def print(self, *args):
-
         name = Play.Name(self)
         print("Nom du joueur :", name)
         text_story = self.ids.text_story
@@ -69,8 +124,6 @@ class Play(Screen):
 
     def beginning(self, widget, *args):
         LayoutGame = self.ids.LayoutGame
-        #anim = Animation(opacity=0)
-        #anim.start(LayoutGame)
         self.remove_widget(LayoutGame)
         Play.print(self)
 
@@ -92,7 +145,6 @@ class Myapp(App):
         sm.add_widget(Play(name='NewGame'))
         sm.add_widget(Story(name='StoryWindow'))
         return sm
-
 
 if __name__ == "__main__":
     Myapp().run()

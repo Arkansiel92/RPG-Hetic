@@ -212,32 +212,141 @@
             font_size: 72
             font_name: 'divers/Pixels.ttf'
             pos: -680, 350
+
+
         Label:
             text:"Points restants : "
             font_size: 32
             font_name: 'divers/Pixels.ttf'
             pos: -680, 300
         Label:
+            id: remaining_counter
+            text:"10"
+            font_size: 42
+            font_name: 'divers/Pixels.ttf'
+            pos: -580, 300
+
+
+
+        Label:
             text:"Vie : "
             font_size: 64
             font_name: 'divers/Pixels.ttf'
-            pos: -760, 230
+            pos: -760, 220
+
+        Label:
+            id: counter_health
+            text:"0"
+            font_size: 64
+            font_name: 'divers/Pixels.ttf'
+            pos: -660, 220
+
+
         Label:
             text:"Force : "
             font_size: 64
             font_name: 'divers/Pixels.ttf'
             pos: -773, 170
         Label:
+            id: counter_strength
+            text:"0"
+            font_size: 64
+            font_name: 'divers/Pixels.ttf'
+            pos: -660, 170
+
+
+        Label:
             text:"Defense : "
             font_size: 64
             font_name: 'divers/Pixels.ttf'
             pos: -790, 120
+        Label:
+            id: counter_defense
+            text:"0"
+            font_size: 64
+            font_name: 'divers/Pixels.ttf'
+            pos: -660, 120
+
+
 
         Label:
             text:"Magie : "
             font_size: 64
             font_name: 'divers/Pixels.ttf'
             pos: -780, 70
+        Label:
+            id: counter_magic
+            text:"0"
+            font_size: 64
+            font_name: 'divers/Pixels.ttf'
+            pos: -660, 70
+
+
+        Button:
+            id: add_health
+            pos: 400, 740
+            size_hint: .02, .02
+            background_color: 0,0,0,0
+            on_release: root.add_health(self)
+            Image:
+                id: button_add_health
+                source: 'Img/Buttons/add_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+
+        Button:
+            id: restart_caract
+            pos: 400, 825
+            size_hint: .02, .02
+            background_color: 0,0,0,0
+            on_release: root.restart_caract(self)
+            Image:
+                id: button_restart_caract
+                source:'Img/Buttons/restart_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+
+        
+        Button:
+            id: add_strength
+            pos: 400, 690
+            size_hint: .02, .02
+            background_color: 0,0,0,0
+            on_release: root.add_strength(self)
+            Image:
+                id: button_add_health
+                source: 'Img/Buttons/add_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+
+        Button:
+            id: add_defense
+            pos: 400, 640
+            size_hint: .02, .02
+            background_color: 0,0,0,0
+            on_release: root.add_defense(self)
+            Image:
+                id: button_add_health
+                source: 'Img/Buttons/add_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+
+        Button:
+            id: add_magic
+            pos: 400, 590
+            size_hint: .02, .02
+            background_color: 0,0,0,0
+            on_release: root.add_magic(self)
+            Image:
+                id: button_add_health
+                source: 'Img/Buttons/add_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
 
 
 
