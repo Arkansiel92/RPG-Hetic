@@ -1,0 +1,434 @@
+
+<Main>
+    Video:
+        id: video_bg_main
+        source: 'E:\Programme Python\Programme Python\AppKivy\divers\Enchanted Forest.mp4'
+        state: 'play'
+        loop: True
+        allow_stretch: True
+
+    GridLayout:
+        padding: 20
+        spacing: 50
+        cols:1
+        size: root.width, root.height
+
+        Image:
+            source:'Img/Logo RPGtic snowstyle.png'
+
+        Button:
+            id: new_game
+            background_color : 0,0,0,0
+            size_hint: 0.15,0.4
+            bold: True
+            on_release:
+                root.manager.current = "NewGame"
+                root.manager.transition.direction = "left"
+            Image:
+                id: img_new
+                source: 'Img/Buttons/play_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+
+        Button:
+            id: load_save
+            background_color : 0,0,0,0
+            size_hint: 0.15,0.4
+            bold: True
+            on_release:
+                root.manager.current = "LoadWindow"
+                root.manager.transition.direction = "left"
+            Image:
+                id: img_load
+                source: 'Img/Buttons/load_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+
+        Button:
+            id: info
+            background_color : 0,0,0,0
+            size_hint: 0.15,0.4
+            bold: True
+            on_release:
+                root.manager.current = "InfoWindow"
+                root.manager.transition.direction = "left"
+            Image:
+                id: img_info
+                source: 'Img/Buttons/option_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+
+        Button:
+            id: quit
+            background_color : 0,0,0,0
+            size_hint: 0.15,0.4
+            bold: True
+            on_press:
+                exit()
+            Image:
+                id: img_quit
+                source: 'Img/Buttons/quit_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+
+        FloatLayout:
+            size: 100, 200
+            size_hint: .5,0.8
+
+            Switch:
+                id: sound
+                active: True
+                size_hint: 0.15,0.8
+                on_active: root.sound(self, self.active)
+
+<Info>
+    Video:
+        id: video_bg_info
+        source: 'E:\Programme Python\Programme Python\AppKivy\divers\Enchanted Forest.mp4'
+        state: 'play'
+        loop: True
+        allow_stretch: True
+
+    GridLayout:
+        padding: 20
+        spacing: 10
+        cols:1
+        size: root.width, root.height
+
+        Label:
+            Image:
+                id: img_parchemin
+                source: 'Img/resume_info.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+
+
+
+        Button:
+            id: quit_info
+            background_color : 0,0,0,0
+            size_hint: 0.15,0.3
+            bold: True
+            on_release:
+                root.manager.current = "MainWindow"
+                root.manager.transition.direction = "right"
+            Image:
+                id: img_quit
+                source: 'Img/Buttons/quit_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+
+<Load>
+    Video:
+        id: video_bg_load
+        source: 'E:\Programme Python\Programme Python\AppKivy\divers\Enchanted Forest.mp4'
+        state: 'play'
+        loop: True
+        allow_stretch: True
+
+    GridLayout:
+        padding: 20
+        spacing: 10
+        cols:1
+        size: root.width, root.height
+
+        Label:
+            text:"En developpement... (c'est faux mais ca fait style de le dire)"
+            font_size: 64
+            font_name: 'divers/Pixels.ttf'
+
+        Button:
+            id: quit_info
+            background_color : 0,0,0,0
+            size_hint: 0.15,0.3
+            bold: True
+            on_release:
+                root.manager.current = "MainWindow"
+                root.manager.transition.direction = "right"
+            Image:
+                id: img_quit
+                source: 'Img/Buttons/quit_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+
+<Play>
+    Video:
+        id: video_bg_play
+        source: 'E:\Programme Python\Programme Python\AppKivy\divers\Enchanted Forest.mp4'
+        state: 'play'
+        loop: True
+        allow_stretch: True
+
+    Button:
+        pos: 1000, 100
+        id: go_game
+        background_color : 0,0,0,0
+        size_hint: 0.15,0.3
+        on_release:
+            root.manager.current = "StoryWindow"
+            root.manager.transition.direction = "left"
+        Image:
+            id: img_go_game
+            source: 'Img/Buttons/play_button.png'
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
+            size: self.texture_size
+
+    FloatLayout:
+        id: LayoutGame
+
+        Image:
+            source:'Img/Info_player_book.png'
+        Image:
+            id: skin_perso
+            pos: -300, 0
+            source:'Img/Player.png'  
+
+        TextInput:
+            pos: -320, -310
+            id: name_of_player
+            hint_text:'Entrez votre nom'
+            hint_text_color: 1,1,1,1
+            background_color: 0,0,0,0
+            cursor_color: 1,1,1,1
+            font_name: 'divers/Pixels.ttf'
+            font_size: 72
+            foreground_color: 1,1,1,1
+            multiline: False
+            halign: 'center'
+
+        Button:
+            id: switch_skin_left
+            pos: 450, 350
+            size_hint: .02, .02
+            background_color: 0,0,0,0
+            on_release: root.skin_player_left()
+            Image:
+                id: button_add_health
+                source: 'Img/Buttons/switch_left_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+
+        Button:
+            id: switch_skin_right
+            pos: 800, 350
+            size_hint: .02, .02
+            background_color: 0,0,0,0
+            on_release: root.skin_player_right()
+            Image:
+                id: button_add_health
+                source: 'Img/Buttons/switch_right_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+
+        Label:
+            text:"Statistiques"
+            font_size: 72
+            font_name: 'divers/Pixels.ttf'
+            pos: 300, 360
+
+
+        Label:
+            text:"Points restants : "
+            font_size: 32
+            font_name: 'divers/Pixels.ttf'
+            pos: 300, 300
+        Label:
+            id: remaining_counter
+            text:"10"
+            font_size: 42
+            font_name: 'divers/Pixels.ttf'
+            pos: 400, 300
+
+
+
+        Label:
+            text:"Vie : "
+            font_size: 64
+            font_name: 'divers/Pixels.ttf'
+            pos: 200, 220
+
+        Label:
+            id: counter_health
+            text:"0"
+            font_size: 64
+            font_name: 'divers/Pixels.ttf'
+            pos: 400, 220
+
+
+        Label:
+            text:"Force : "
+            font_size: 64
+            font_name: 'divers/Pixels.ttf'
+            pos: 200, 170
+        Label:
+            id: counter_strength
+            text:"0"
+            font_size: 64
+            font_name: 'divers/Pixels.ttf'
+            pos: 400, 170
+
+
+        Label:
+            text:"Defense : "
+            font_size: 64
+            font_name: 'divers/Pixels.ttf'
+            pos: 200, 120
+        Label:
+            id: counter_defense
+            text:"0"
+            font_size: 64
+            font_name: 'divers/Pixels.ttf'
+            pos: 400, 120
+
+
+
+        Label:
+            text:"Magie : "
+            font_size: 64
+            font_name: 'divers/Pixels.ttf'
+            pos: 200, 70
+        Label:
+            id: counter_magic
+            text:"0"
+            font_size: 64
+            font_name: 'divers/Pixels.ttf'
+            pos: 400, 70
+
+        Button:
+            id: restart_caract
+            pos: 1400, 825
+            size_hint: .02, .02
+            background_color: 0,0,0,0
+            on_release: root.restart_caract(self)
+            Image:
+                id: button_restart_caract
+                source:'Img/Buttons/restart_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+
+
+        Button:
+            id: add_health
+            pos: 1400, 740
+            size_hint: .02, .02
+            background_color: 0,0,0,0
+            on_release: root.add_health(self)
+            Image:
+                id: button_add_health
+                source: 'Img/Buttons/add_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+       
+        Button:
+            id: add_strength
+            pos: 1400, 690
+            size_hint: .02, .02
+            background_color: 0,0,0,0
+            on_release: root.add_strength(self)
+            Image:
+                id: button_add_health
+                source: 'Img/Buttons/add_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+
+        Button:
+            id: add_defense
+            pos: 1400, 640
+            size_hint: .02, .02
+            background_color: 0,0,0,0
+            on_release: root.add_defense(self)
+            Image:
+                id: button_add_health
+                source: 'Img/Buttons/add_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+
+        Button:
+            id: add_magic
+            pos: 1400, 590
+            size_hint: .02, .02
+            background_color: 0,0,0,0
+            on_release: root.add_magic(self)
+            Image:
+                id: button_add_health
+                source: 'Img/Buttons/add_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+
+
+
+
+        Button:
+            pos: 1100, 100
+            id: ok_play
+            background_color : 0,0,0,0
+            size_hint: 0.15,0.3
+            on_release:
+                #root.manager.current = "StoryWindow"
+                #root.manager.transition.direction = "left"
+                root.beginning(self)
+            Image:
+                id: img_ok_play
+                source: 'Img/Buttons/play_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+
+        Button:
+            pos: 500, 100
+            id: quit_new_game
+            background_color : 0,0,0,0
+            size_hint: 0.15,0.3
+            bold: True
+            on_release:
+                root.manager.current = "MainWindow"
+                root.manager.transition.direction = "right"
+            Image:
+                id: img_quit
+                source: 'Img/Buttons/quit_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+    Label:
+        id: text_story
+        pos: -320, 350
+        text:"Creation du personnage"
+        font_size: 64
+        font_name: 'divers/Pixels.ttf'
+
+<Story>
+
+    FloatLayout:
+        Image:
+            source:'Img/Background/background_automne.jpg'
+
+        Image:
+            source:'Img/map_clean.png'
+            pos: -50, 750
+            size_hint: .3, .3
+        Image:
+            source:'Img/cursor_map.png'
+            pos: -50, 750
+            size_hint: .3, .3
+
+    Label:
+        id: text_story
+        pos: 0, 350
+        text: "Bienvenue dans le monde d'Hetic."
+        font_size: 64
+        font_name: 'divers/Pixels.ttf'
