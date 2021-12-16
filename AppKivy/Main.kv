@@ -1,3 +1,26 @@
+#:import Factory kivy.factory.Factory
+<PopupPlay@Popup>:
+    id: Popup_warning
+    title: 'Continuer ?'
+    title_align: 'center'
+    separator_color: 0,0,0,0
+    size_hint: .3, .3
+    FloatLayout:
+        Label:
+            text: 'Il manque des informations !\n  Voulez-vous continuer ?'
+            pos: 700, 450
+            font_size: 64
+            font_name: 'divers/Pixels.ttf'
+        Button:
+            text: 'Continuer'
+            pos: 1050, 400
+            size_hint: .3, .3
+            on_release: root.dismiss()
+        Button:
+            text: 'Retour'
+            pos: 700, 400
+            size_hint: .3, .3
+            on_release: root.dismiss()
 
 <Main>
     Video:
@@ -382,6 +405,7 @@
                 #root.manager.current = "StoryWindow"
                 #root.manager.transition.direction = "left"
                 root.beginning(self)
+                #Factory.PopupPlay().open()
             Image:
                 id: img_ok_play
                 source: 'Img/Buttons/play_button.png'
@@ -418,17 +442,47 @@
             source:'Img/Background/background_automne.jpg'
 
         Image:
-            source:'Img/map_clean.png'
-            pos: -50, 750
-            size_hint: .3, .3
+            source:'Img/User Interface assets/Player_Image.png'
+            pos: -850, 450
         Image:
-            source:'Img/cursor_map.png'
-            pos: -50, 750
-            size_hint: .3, .3
-
-    Label:
-        id: text_story
-        pos: 0, 350
-        text: "Bienvenue dans le monde d'Hetic."
-        font_size: 64
-        font_name: 'divers/Pixels.ttf'
+            source:'Img/User Interface assets/Background_Bar.png'
+            pos: -530, 500
+        Image:
+            source:'Img/User Interface assets/Background_Bar.png'
+            pos: -500, 450
+        Image:
+            id: Health_Bar
+            source:'Img/User Interface assets/Health_Bar_100.png'
+            pos: -540, 500
+        Image:
+            id: Mana_Bar
+            source:'Img/User Interface assets/Mana_Bar_100.png'
+            pos: -510, 450
+        Label:
+            id: Level_Player
+            text:"1"
+            font_name: 'divers/Pixels.ttf'
+            font_size: 150
+            pos: -845, 470
+        Button:
+            id: Button_Inventory
+            size_hint: .04, .05
+            pos: 200, 880
+            background_color: 0,0,0,0
+            bold: True
+            Image:
+                source:'Img/User Interface assets/Button_Inventory.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+        Button:
+            id: Button_Spells
+            size_hint: .04, .05
+            pos: 130, 820
+            background_color: 0,0,0,0
+            bold: True
+            Image:
+                source:'Img/User Interface assets/Button_Spells.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size

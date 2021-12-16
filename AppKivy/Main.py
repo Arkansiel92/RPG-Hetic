@@ -1,9 +1,13 @@
 import kivy
+from kivy.core.text import Label
 kivy.require('2.0.0')
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.core.audio import SoundLoader
+from kivy.uix.button import Button
+from kivy.uix.label import Label
+from kivy.uix.popup import Popup
 from kivy.graphics import Rectangle
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
 from random import randint
@@ -12,12 +16,11 @@ from Class_characters import Player, Monster
 
 
 
-
 Builder.load_file('Main.kv')
 
 class Main(Screen):
     list_sound = ['divers/music/dungeon-quest-ost-track2.mp3', 'divers/music/enchanted-forest.mp3',
-        'divers/music/dungeon-quest-ost.mp3']
+        'divers/music/dungeon-quest-ost.mp3'] # Liste des musiques du jeu 
     music = SoundLoader.load(list_sound[randint(0, 2)])
     music.loop = True
     if music:
@@ -38,8 +41,8 @@ class Load(Screen):
     pass
 
 class Play(Screen):
-    i = 0
-    List_Skin = ['Img/Player.png','Img/Player_2.png','Img/Player_3.png','Img/Player_4.png']
+    i = 0 # incrémentation pour le choix du skin
+    List_Skin = ['Img/Player.png','Img/Player_2.png','Img/Player_3.png','Img/Player_4.png'] #skin
     remaining_points = 10
     counter_health = 0
     counter_strength = 0
@@ -105,7 +108,7 @@ class Play(Screen):
         self.ids.counter_defense.text= str(self.counter_defense)
         self.ids.counter_magic.text= str(self.counter_magic)
         self.ids.remaining_counter.text= str(self.remaining_points)
-        print("[Terminal] : réinitialisation des points.")
+        print("[Terminal] : réinitialisation des points de caractéristiques.")
 
 
     def Name(self):
