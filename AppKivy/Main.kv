@@ -1,26 +1,56 @@
 #:import Factory kivy.factory.Factory
-<PopupPlay@Popup>:
-    id: Popup_warning
-    title: 'Continuer ?'
+<PopupInventory@Popup>:
+    id: Popup_inventory
+    title: 'inventaire'
+    title_size: 64
+    title_font: 'divers/Pixels.ttf'
     title_align: 'center'
-    separator_color: 0,0,0,0
-    size_hint: .3, .3
-    FloatLayout:
+    separator_color: 1,1,1,1
+    size_hint: .7, .7
+    BoxLayout:
+        id: BoxLayout_inventory
+
+
+<PopupSpells@Popup>:
+    id: Popup_spells
+    title: 'Sorts'
+    title_size: 64
+    title_font: 'divers/Pixels.ttf'
+    title_align: 'center'
+    separator_color: 1,1,1,1
+    size_hint: .3, .9
+    GridLayout:
+        cols: 2
+        Image:
+            source:'Img/Spells/Boule_feu.png'
         Label:
-            text: 'Il manque des informations !\n  Voulez-vous continuer ?'
-            pos: 700, 450
-            font_size: 64
-            font_name: 'divers/Pixels.ttf'
-        Button:
-            text: 'Continuer'
-            pos: 1050, 400
-            size_hint: .3, .3
-            on_release: root.dismiss()
-        Button:
-            text: 'Retour'
-            pos: 700, 400
-            size_hint: .3, .3
-            on_release: root.dismiss()
+            text:"Souffle de feu : \nLance une puissante attaque de feu \nsur l'adversaire.\nCout en mana : 20"
+            font_name:'divers/Pixels.ttf'
+            font_size: 28
+            halign: 'left'
+        Image:
+            source:'Img/Spells/Eclair.png'
+        Label:
+            text:"Eclair pourfendeur : \nLance un violent eclair directement \nsur l'ennemi \nCout en mana : 25"
+            font_name:'divers/Pixels.ttf'
+            font_size: 28
+            halign: 'left'
+        Image:
+            source:'Img/Spells/Ataraxie.png'
+        Label:
+            text:"Ataraxie : \nCreer une protection autour du joueur \nesquive la prochaine attaque \nCout en mana : 30"
+            font_name:'divers/Pixels.ttf'
+            font_size: 28
+            halign: 'left'
+        Image:
+            source:'Img/Spells/Bravoure.png'
+        Label:
+            text:"Bravoure : \nCanalyse votre puissance. \nDegat de la prochaine attaque double \nCout en mana : 30"
+            font_name:'divers/Pixels.ttf'
+            font_size: 28
+            halign: 'left'
+
+
 
 <Main>
     Video:
@@ -41,7 +71,7 @@
 
         Button:
             id: new_game
-            background_color : 0,0,0,0
+            background_color: 0,0,0,0
             size_hint: 0.15,0.4
             bold: True
             on_release:
@@ -196,7 +226,6 @@
         size_hint: 0.15,0.3
         on_release:
             root.manager.current = "StoryWindow"
-            root.manager.transition.direction = "left"
         Image:
             id: img_go_game
             source: 'Img/Buttons/play_button.png'
@@ -212,7 +241,7 @@
         Image:
             id: skin_perso
             pos: -300, 0
-            source:'Img/Player.png'  
+            source:'Img/Player.png'
 
         TextInput:
             pos: -320, -310
@@ -226,6 +255,13 @@
             foreground_color: 1,1,1,1
             multiline: False
             halign: 'center'
+        Label:
+            id: class_player
+            text:'Classe : Heros'
+            font_name:'divers/Pixels.ttf'
+            font_size:48
+            pos: -300, 125
+
 
         Button:
             id: switch_skin_left
@@ -275,40 +311,40 @@
 
 
         Label:
-            text:"Vie : "
+            text:"Vie(+20) : "
             font_size: 64
             font_name: 'divers/Pixels.ttf'
             pos: 200, 220
 
         Label:
             id: counter_health
-            text:"0"
+            text:"200"
             font_size: 64
             font_name: 'divers/Pixels.ttf'
             pos: 400, 220
 
 
         Label:
-            text:"Force : "
+            text:"Force(+5) : "
             font_size: 64
             font_name: 'divers/Pixels.ttf'
             pos: 200, 170
         Label:
             id: counter_strength
-            text:"0"
+            text:"50"
             font_size: 64
             font_name: 'divers/Pixels.ttf'
             pos: 400, 170
 
 
         Label:
-            text:"Defense : "
+            text:"Defense(+5) : "
             font_size: 64
             font_name: 'divers/Pixels.ttf'
             pos: 200, 120
         Label:
             id: counter_defense
-            text:"0"
+            text:"50"
             font_size: 64
             font_name: 'divers/Pixels.ttf'
             pos: 400, 120
@@ -316,13 +352,13 @@
 
 
         Label:
-            text:"Magie : "
+            text:"Magie(+10) : "
             font_size: 64
             font_name: 'divers/Pixels.ttf'
             pos: 200, 70
         Label:
             id: counter_magic
-            text:"0"
+            text:"100"
             font_size: 64
             font_name: 'divers/Pixels.ttf'
             pos: 400, 70
@@ -353,7 +389,7 @@
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
                 size: self.texture_size
-       
+
         Button:
             id: add_strength
             pos: 1400, 690
@@ -402,8 +438,6 @@
             background_color : 0,0,0,0
             size_hint: 0.15,0.3
             on_release:
-                #root.manager.current = "StoryWindow"
-                #root.manager.transition.direction = "left"
                 root.beginning(self)
                 #Factory.PopupPlay().open()
             Image:
@@ -436,11 +470,98 @@
         font_name: 'divers/Pixels.ttf'
 
 <Story>
-
     FloatLayout:
         Image:
             source:'Img/Background/background_automne.jpg'
+        Label:
+            text:'Quelle direction voulez-vous prendre ?'
+            font_size:64
+            font_name:'divers/Pixels.ttf'
+            pos: 0, 400
+        Button:
+            size_hint: .09, .09
+            pos: 850, 0
+            bold: True
+            background_color: 0,0,0,0
+            on_press:
+                root.manager.current = "FightWindow"
+            Image:
+                source:'Img/Buttons/go_sud.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+        Button:
+            size_hint: .09, .09
+            pos: 850, 975
+            bold: True
+            background_color: 0,0,0,0
+            on_press:
+                root.manager.current = "FightWindow"
+            Image:
+                source:'Img/Buttons/go_nord.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+        Button:
+            size_hint: .09, .09
+            pos: 0, 500
+            bold: True
+            background_color: 0,0,0,0
+            on_press:
+                root.manager.current = "FightWindow"
+            Image:
+                source:'Img/Buttons/go_ouest.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+        Button:
+            size_hint: .09, .09
+            bold: True
+            pos: 1750, 500
+            background_color: 0,0,0,0
+            on_press:
+                root.manager.current = "FightWindow"
+            Image:
+                source:'Img/Buttons/go_est.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
 
+<Fight>
+    text_monster:text_monster
+    choice_action:choice_action
+    choice_spell:choice_spell
+    Image:
+        source:'Img/Background/background_automne.jpg'
+    Label:
+        id: text_monster
+        text:"Un monstre n'est pas loin ! Voulez-vous l'attaquer ?"
+        pos: 0, 400
+        font_size: 64
+        font_name:'divers/Pixels.ttf'
+    Button:
+        id: button_yes_monster
+        size_hint: .08, .08
+        background_color: 0,0,0,0
+        pos: 600, 800
+        on_release: root.attack_system()
+        Image:
+            source:'Img/Buttons/yes_button.png'
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
+            size: self.texture_size
+    Button:
+        id: button_no_monster
+        size_hint: .08, .08
+        background_color: 0,0,0,0
+        pos:1100, 800
+        on_release: root.manager.current = "StoryWindow"
+        Image:
+            source:'Img/Buttons/no_button.png'
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
+            size: self.texture_size
+    FloatLayout:
         Image:
             source:'Img/User Interface assets/Player_Image.png'
             pos: -850, 450
@@ -454,13 +575,27 @@
             id: Health_Bar
             source:'Img/User Interface assets/Health_Bar_100.png'
             pos: -540, 500
+            Label:
+                id: health_player_story
+                text:root.health_player
+                font_size: 48
+                font_name: 'divers/Pixels.ttf'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
         Image:
             id: Mana_Bar
             source:'Img/User Interface assets/Mana_Bar_100.png'
             pos: -510, 450
+            Label:
+                id: mana_player_story
+                text:root.mana_player
+                font_size: 48
+                font_name: 'divers/Pixels.ttf'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
         Label:
             id: Level_Player
-            text:"1"
+            text:root.level
             font_name: 'divers/Pixels.ttf'
             font_size: 150
             pos: -845, 470
@@ -470,6 +605,8 @@
             pos: 200, 880
             background_color: 0,0,0,0
             bold: True
+            on_press:
+                Factory.PopupInventory().open()
             Image:
                 source:'Img/User Interface assets/Button_Inventory.png'
                 center_x: self.parent.center_x
@@ -481,8 +618,94 @@
             pos: 130, 820
             background_color: 0,0,0,0
             bold: True
+            on_press:
+                Factory.PopupSpells().open()
             Image:
                 source:'Img/User Interface assets/Button_Spells.png'
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
                 size: self.texture_size
+
+        Image:
+            source:'Img/User Interface assets/Monster_Image.png'
+            pos: 850, 450
+        Image:
+            source:'Img/User Interface assets/Background_Bar.png'
+            pos: 530, 500
+        Image:
+            source:'Img/User Interface assets/Monster_Bar_100.png'
+            pos: 520, 500
+            Label:
+                id: monster_player_story
+                text:root.monster_health
+                font_size: 48
+                font_name: 'divers/Pixels.ttf'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+        Label:
+            text:root.monster_name
+            pos: 500, -200
+            font_size: 48
+            font_name: 'divers/Pixels.ttf'
+    GridLayout:
+        id: choice_action
+        rows: 1
+        padding: 500
+        pos: 0, 2000
+        Button:
+            text:'attaquer avec son arme'
+            size_hint: .07, .07
+            on_release: root.attack_weapon()
+        Button:
+            text:'Sort'
+            size_hint: .07, .07
+            on_release: root.choose_spell()
+        Button:
+            text:'Inventaire'
+            size_hint: .07, .07
+        Button:
+            text:'Passer le tour'
+            size_hint: .07, .07
+    GridLayout:
+        id: choice_spell
+        rows: 1
+        padding: 500
+        pos: 0, 2000
+        Button:
+            background_color: 0,0,0,0
+            size_hint: .07, .07
+            bold: True
+            Image:
+                source:'Img/Spells/Boule_feu.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+        Button:
+            background_color: 0,0,0,0
+            size_hint: .07, .07
+            Image:
+                source:'Img/Spells/Eclair.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+        Button:
+            background_color: 0,0,0,0
+            size_hint: .07, .07
+            Image:
+                source:'Img/Spells/Ataraxie.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+        Button:
+            background_color: 0,0,0,0
+            size_hint: .07, .07
+            Image:
+                source:'Img/Spells/Bravoure.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+        Button:
+            text:'Retour'
+            size_hint: .07, .07
+            on_release: root.menu_fight()
+
