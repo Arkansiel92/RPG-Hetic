@@ -7,8 +7,9 @@
     title_align: 'center'
     separator_color: 1,1,1,1
     size_hint: .7, .7
-    BoxLayout:
+    GridLayout:
         id: BoxLayout_inventory
+        rows: 2
 
 
 <PopupSpells@Popup>:
@@ -24,28 +25,28 @@
         Image:
             source:'Img/Spells/Boule_feu.png'
         Label:
-            text:"Souffle de feu : \nLance une puissante attaque de feu \nsur l'adversaire.\nCout en mana : 20"
+            text:"Souffle de feu : \nLance une attaque de feu \nsur l'adversaire.\nCout en mana : 30"
             font_name:'divers/Pixels.ttf'
             font_size: 28
             halign: 'left'
         Image:
             source:'Img/Spells/Eclair.png'
         Label:
-            text:"Eclair pourfendeur : \nLance un violent eclair directement \nsur l'ennemi \nCout en mana : 25"
+            text:"Eclair pourfendeur : \nLance un violent eclair \nDegat de foudre \nCout en mana : 60"
             font_name:'divers/Pixels.ttf'
             font_size: 28
             halign: 'left'
         Image:
             source:'Img/Spells/Ataraxie.png'
         Label:
-            text:"Ataraxie : \nCreer une protection autour du joueur \nesquive la prochaine attaque \nCout en mana : 30"
+            text:"Ataraxie : \nCreer une magie d'elfe \nSoigne le joueur \nCout en mana : 35"
             font_name:'divers/Pixels.ttf'
             font_size: 28
             halign: 'left'
         Image:
             source:'Img/Spells/Bravoure.png'
         Label:
-            text:"Bravoure : \nCanalyse votre puissance. \nDegat de la prochaine attaque double \nCout en mana : 30"
+            text:"Bravoure : \nCanalyse votre puissance. \nVous redonne de la mana \nCout en mana : 0"
             font_name:'divers/Pixels.ttf'
             font_size: 28
             halign: 'left'
@@ -55,7 +56,7 @@
 <Main>
     Video:
         id: video_bg_main
-        source: 'E:\Programme Python\Programme Python\AppKivy\divers\Enchanted Forest.mp4'
+        source: 'divers\Enchanted Forest.mp4'
         state: 'play'
         loop: True
         allow_stretch: True
@@ -141,7 +142,7 @@
 <Info>
     Video:
         id: video_bg_info
-        source: 'E:\Programme Python\Programme Python\AppKivy\divers\Enchanted Forest.mp4'
+        source: 'divers\Enchanted Forest.mp4'
         state: 'play'
         loop: True
         allow_stretch: True
@@ -180,7 +181,7 @@
 <Load>
     Video:
         id: video_bg_load
-        source: 'E:\Programme Python\Programme Python\AppKivy\divers\Enchanted Forest.mp4'
+        source: 'divers\Enchanted Forest.mp4'
         state: 'play'
         loop: True
         allow_stretch: True
@@ -214,24 +215,10 @@
 <Play>
     Video:
         id: video_bg_play
-        source: 'E:\Programme Python\Programme Python\AppKivy\divers\Enchanted Forest.mp4'
+        source: 'divers\Enchanted Forest.mp4'
         state: 'play'
         loop: True
         allow_stretch: True
-
-    Button:
-        pos: 1000, 100
-        id: go_game
-        background_color : 0,0,0,0
-        size_hint: 0.15,0.3
-        on_release:
-            root.manager.current = "StoryWindow"
-        Image:
-            id: img_go_game
-            source: 'Img/Buttons/play_button.png'
-            center_x: self.parent.center_x
-            center_y: self.parent.center_y
-            size: self.texture_size
 
     FloatLayout:
         id: LayoutGame
@@ -318,7 +305,7 @@
 
         Label:
             id: counter_health
-            text:"200"
+            text:"250"
             font_size: 64
             font_name: 'divers/Pixels.ttf'
             pos: 400, 220
@@ -438,7 +425,8 @@
             background_color : 0,0,0,0
             size_hint: 0.15,0.3
             on_release:
-                root.beginning(self)
+                root.print()
+                root.manager.current = "StoryWindow"
                 #Factory.PopupPlay().open()
             Image:
                 id: img_ok_play
@@ -470,21 +458,29 @@
         font_name: 'divers/Pixels.ttf'
 
 <Story>
+    icon_player:Pos_on_map
     FloatLayout:
         Image:
             source:'Img/Background/background_automne.jpg'
         Label:
+            id: text_direction
             text:'Quelle direction voulez-vous prendre ?'
             font_size:64
             font_name:'divers/Pixels.ttf'
             pos: 0, 400
+        Image:
+            id: Map_Hetic
+            source:'Img/User Interface assets/Map_Hetic.png'
+        Image:
+            id: Pos_on_map
+            source:'Img/User Interface assets/Pos_on_map.png'
         Button:
             size_hint: .09, .09
             pos: 850, 0
             bold: True
             background_color: 0,0,0,0
             on_press:
-                root.manager.current = "FightWindow"
+                root.run_sud()
             Image:
                 source:'Img/Buttons/go_sud.png'
                 center_x: self.parent.center_x
@@ -496,7 +492,7 @@
             bold: True
             background_color: 0,0,0,0
             on_press:
-                root.manager.current = "FightWindow"
+                root.run_nord()
             Image:
                 source:'Img/Buttons/go_nord.png'
                 center_x: self.parent.center_x
@@ -508,7 +504,7 @@
             bold: True
             background_color: 0,0,0,0
             on_press:
-                root.manager.current = "FightWindow"
+                root.run_ouest()
             Image:
                 source:'Img/Buttons/go_ouest.png'
                 center_x: self.parent.center_x
@@ -520,7 +516,7 @@
             pos: 1750, 500
             background_color: 0,0,0,0
             on_press:
-                root.manager.current = "FightWindow"
+                root.run_est()
             Image:
                 source:'Img/Buttons/go_est.png'
                 center_x: self.parent.center_x
@@ -531,8 +527,20 @@
     text_monster:text_monster
     choice_action:choice_action
     choice_spell:choice_spell
+    button_yes:button_yes_monster
+    button_no:button_no_monster
+    name_monster:name_monster
     Image:
+        id : img_background
         source:'Img/Background/background_automne.jpg'
+    Image:
+        id: skin_player
+        source:root.skin
+        pos: 0, 2000
+    Image:
+        id: skin_monster
+        source:root.skin_monster
+        pos: 0, 2000
     Label:
         id: text_monster
         text:"Un monstre n'est pas loin ! Voulez-vous l'attaquer ?"
@@ -544,7 +552,8 @@
         size_hint: .08, .08
         background_color: 0,0,0,0
         pos: 600, 800
-        on_release: root.attack_system()
+        on_release:
+            root.attack_system()
         Image:
             source:'Img/Buttons/yes_button.png'
             center_x: self.parent.center_x
@@ -642,11 +651,6 @@
                 font_name: 'divers/Pixels.ttf'
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
-        Label:
-            text:root.monster_name
-            pos: 500, -200
-            font_size: 48
-            font_name: 'divers/Pixels.ttf'
     GridLayout:
         id: choice_action
         rows: 1
@@ -654,18 +658,28 @@
         pos: 0, 2000
         Button:
             text:'attaquer avec son arme'
+            font_size: 28
+            font_name: 'divers/Pixels.ttf'
             size_hint: .07, .07
             on_release: root.attack_weapon()
         Button:
             text:'Sort'
+            font_size: 28
+            font_name: 'divers/Pixels.ttf'
             size_hint: .07, .07
             on_release: root.choose_spell()
         Button:
             text:'Inventaire'
+            font_size: 28
+            font_name: 'divers/Pixels.ttf'
             size_hint: .07, .07
+            on_release: Factory.PopupInventory().open()
         Button:
             text:'Passer le tour'
+            font_size: 28
+            font_name: 'divers/Pixels.ttf'
             size_hint: .07, .07
+            on_release: root.monster_turn()
     GridLayout:
         id: choice_spell
         rows: 1
@@ -674,7 +688,7 @@
         Button:
             background_color: 0,0,0,0
             size_hint: .07, .07
-            bold: True
+            on_release: root.Fire_Spell()
             Image:
                 source:'Img/Spells/Boule_feu.png'
                 center_x: self.parent.center_x
@@ -683,6 +697,7 @@
         Button:
             background_color: 0,0,0,0
             size_hint: .07, .07
+            on_release: root.Thunder_Spell()
             Image:
                 source:'Img/Spells/Eclair.png'
                 center_x: self.parent.center_x
@@ -691,6 +706,7 @@
         Button:
             background_color: 0,0,0,0
             size_hint: .07, .07
+            on_release: root.Protect_Spell()
             Image:
                 source:'Img/Spells/Ataraxie.png'
                 center_x: self.parent.center_x
@@ -699,6 +715,7 @@
         Button:
             background_color: 0,0,0,0
             size_hint: .07, .07
+            on_release: root.Boost_Spell()
             Image:
                 source:'Img/Spells/Bravoure.png'
                 center_x: self.parent.center_x
@@ -709,3 +726,116 @@
             size_hint: .07, .07
             on_release: root.menu_fight()
 
+    FloatLayout: #ecran fin de combat
+        Image:
+            id:end_fight
+            pos: 0, 2000
+            source:'Img/User Interface assets/Interface_end_fight.png'
+        Label:
+            id:xp_text
+            pos: 0, 2000
+            text:'xp'
+            font_name:'divers\Pixels.ttf'
+            font_size:42
+        Button:
+            id:button_end_fight
+            background_color: 0,0,0,0
+            size_hint: .07, .07
+            pos: 0, 2000
+            on_release:
+                root.refresh()
+                root.manager.current = "StoryWindow"
+            Image:
+                source:'Img/Buttons/load_button.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.texture_size
+        Image:
+            id: low_potion_health
+            source:'Img/Items/low_potion_health.png'
+            pos: 0, 2000
+        Image:
+            id: medium_potion_health
+            source:'Img/Items/medium_potion_health.png'
+            pos: 0, 2000
+        Image:
+            id: strong_potion_health
+            source:'Img/Items/strong_potion_health.png'
+            pos: 0, 2000
+        Image:
+            id: low_potion_mana
+            source:'Img/Items/low_potion_mana.png'
+            pos: 0, 2000
+        Image:
+            id: medium_potion_mana
+            source:'Img/Items/medium_potion_mana.png'
+            pos: 0, 2000
+        Image:
+            id: strong_potion_mana
+            source:'Img/Items/strong_potion_mana.png'
+            pos: 0, 2000
+        Image:
+            id: low_potion_strength
+            source:'Img/Items/low_potion_strength.png'
+            pos: 0, 2000
+        Image:
+            id: medium_potion_strength
+            source:'Img/Items/medium_potion_strength.png'
+            pos: 0, 2000
+        Image:
+            id: strong_potion_strength
+            source:'Img/Items/strong_potion_strength.png'
+            pos: 0, 2000
+        # gif des sorts
+        Image:
+            id: gif_fire
+            source:'Img/Spells/Boule_feu/Spell_feu.gif'
+            pos: 0, 2000
+        Image:
+            id: gif_thunder
+            source:'Img/Spells/Eclair/Eclair_spell.gif'
+            pos: 0, 2000
+        Image:
+            id: gif_bravoure
+            source:'Img/Spells/Bravoure/Bravoure_spell.gif'
+            anim_delay: 0.01
+            pos: 0, 2000
+        Image:
+            id: gif_ataraxie
+            source:'Img/Spells/Ataraxie/Ataraxie_spell.gif'
+            anim_delay: 0.01
+            pos: 0, 2000
+        Image:
+            id: gif_monster
+            source:'Img/Spells/Monster/monster_spell.gif'
+            anim_delay: 0.01
+            pos: 0, 2000
+        Label:
+            id: name_monster
+            text:'Qui est la ?'
+            font_size: 48
+            font_name:'divers/Pixels.ttf'
+            pos: 510, 460
+
+<Dungeon>
+    Image:
+        id: dungeon_background
+        source:'Img/Background/enter_dungeon.jpg'
+    Label:
+        id: dungeon_text
+        text:"J'y suis enfin... Tout ca pour une meuf je suis vraiment un canard..."
+        font_size: 48
+        font_name:'divers/Pixels.ttf'
+        pos: -300, 400
+    Button:
+        id: enter_button
+        size_hint: .07, .07
+        pos: 1400, 100
+        background_color: 0, 0, 0, 0
+        on_release : root.Dungeon()
+        Image:
+            id: img_button_dungeon
+            source: 'Img/Buttons/load_button.png'
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
+            size: self.texture_size

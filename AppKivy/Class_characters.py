@@ -1,17 +1,19 @@
 from random import randint
 
 class Player_Main:
-    def __init__(self, name, health, strength, defense, mana, xp, level, skin):
+    def __init__(self, name, health, strength, defense, mana, xp, level, skin, pos):
         self.name = name
         self.health = health 
         self.strength = strength
         self.defense = defense
         self.mana = mana
-        self.inventory = ["Potion faible de vie","Potion moyenne de vie", "Potion forte de vie", "Potion forte de mana"]
+        self.inventory = []
         self.spells = []
         self.xp = xp
         self.level = level
         self.skin = skin
+        self.pos = pos
+        self.monster_dead = []
     
     def get_damage(self, damage):
         self.health -= damage
@@ -35,10 +37,9 @@ class Monster:
 
 
 class Spell:
-    def __init__(self, name, element, damage, mana):
+    def __init__(self, name, effect, mana):
         self.name = name
-        self.element = element # feu, eau, air, terre
-        self.damage_spell = damage
+        self.effect = effect
         self.mana = mana # coût en mana
         
     def damage(self, Monster_health):
@@ -65,12 +66,13 @@ class Potions:
     def add_caract(self, value_stat):
         return self.power + value_stat 
 
+Player_Main1 = Player_Main("", 250, 50, 50, 100, 0, 1, "Img/Player_2.png", 4)
 
 # ---- class spell
-Spell_boule_feu = Spell("Boule de feu", "feu", randint(30,50), 25)
-Spell_kawaii = Spell("Poussière d'étoile", "air", randint(25,35), 15)
-Spell_canard = Spell("Couin Couin", "eau", randint(35,45), 25)
-Spell_canard_2 = Spell("Couin Couin 2 ", "eau 2", randint(35,45), 25)
+Spell_Feu = Spell("Souffle de feu", 120, 30)
+Spell_Eclair = Spell("Eclair Pourfendeur", 1200, 60)
+Spell_Ataraxie = Spell("Ataraxie", 100, 35)
+Spell_Bravoure = Spell("Bravoure", 200, 0)
 
 # ---- class potions
 low_health_potion = Potions("Potion faible de vie","vie", 50)
@@ -91,7 +93,7 @@ bow = Weapon("un arc", "bois", 35)
 magic_wand = Weapon("baguette magique", "feu", 60)
 
 # ---- class Monster                                                                                                                                               
-Gros_nounours = Monster("Gros nounours", "terre", 600, 40, 20, 150, "Img/monster_skin2.png")
-Brontis = Monster("Brontis", "feu", 800, 60, 30, 300, "")
-Loic = Monster("Loic", "eau", 1000, 80, 40, 450, "")
-Les_impots = Monster("Les impôts", "air", 1500, 150, 60, 600, "Img/monster_skin1.png")
+Gros_nounours = Monster("Gros nounours", "terre", 600, 30, 20, 150, "Img/monster_skin2.png")
+Brontis = Monster("Brontis", "feu", 800, 40, 30, 300, "Img/monster_skin1.png")
+Loic = Monster("Loic", "eau", 1000, 50, 40, 450, "Img/monster_skin2.png")
+Les_impots = Monster("Les impots", "air", 1500, 60, 60, 600, "Img/monster_skin1.png")
