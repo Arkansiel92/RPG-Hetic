@@ -70,7 +70,7 @@ Player_Main1 = Player_Main("", 250, 50, 50, 100, 0, 1, "Img/Player_2.png", 4)
 
 # ---- class spell
 Spell_Feu = Spell("Souffle de feu", 120, 30)
-Spell_Eclair = Spell("Eclair Pourfendeur", 1200, 60)
+Spell_Eclair = Spell("Eclair Pourfendeur", 150, 60)
 Spell_Ataraxie = Spell("Ataraxie", 100, 35)
 Spell_Bravoure = Spell("Bravoure", 200, 0)
 
