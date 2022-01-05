@@ -2,7 +2,7 @@
 RPG avec le meilleur groupe du monde !
 
 
-Jeux python avec la librairie Kivy.
+Jeu python avec la librairie Kivy.
 
 Débug :
 
