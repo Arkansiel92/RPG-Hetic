@@ -1,5 +1,5 @@
 # RPG-Hetic
-RPG avec le meilleur groupe du monde !
+Réalisation d'un projet RPG en équipe de 4
 
 
 Jeu python avec la librairie Kivy.
